@@ -76,3 +76,18 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd
 autocmd BufRead,BufNewFile ~/work/src/wiki/*.txt set filetype=Dokuwiki
 
 autocmd BufNewFile,BufRead $HOME/work/src/personal/mentor-bot/* set nowrap tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+
+" Emacs bindings in control mode
+:cnoremap <C-a>  <Home>
+:cnoremap <C-b>  <Left>
+:cnoremap <C-f>  <Right>
+:cnoremap <C-d>  <Delete>
+" haven't found a way to kill the whole line
+:cnoremap <C-k>  <Delete>
+:cnoremap <M-b>  <S-Left>
+:cnoremap <M-f>  <S-Right>
+:cnoremap <M-d>  <S-right><Delete>
+:cnoremap <Esc>b <S-Left>
+:cnoremap <Esc>f <S-Right>
+:cnoremap <Esc>d <S-right><Delete>
+:cnoremap <C-g>  <C-c>
