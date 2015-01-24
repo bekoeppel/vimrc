@@ -76,3 +76,6 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd
 autocmd BufRead,BufNewFile ~/work/src/wiki/*.txt set filetype=Dokuwiki
 
 autocmd BufNewFile,BufRead $HOME/work/src/personal/mentor-bot/* set nowrap tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+
+" open IPA files as ZIP
+au BufReadCmd *.jar,*.xpi,*.ipa,*.apk call zip#Browse(expand("<amatch>"))
