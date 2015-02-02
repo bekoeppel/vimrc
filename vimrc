@@ -78,7 +78,7 @@ autocmd BufRead,BufNewFile ~/work/src/wiki/*.txt set filetype=Dokuwiki
 autocmd BufNewFile,BufRead $HOME/work/src/personal/mentor-bot/* set nowrap tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " open IPA files as ZIP
-au BufReadCmd *.jar,*.xpi,*.ipa,*.apk call zip#Browse(expand("<amatch>"))
+au BufReadCmd *.jar,*.xpi,*.ipa,*.apk,*.docx,*.xlsx call zip#Browse(expand("<amatch>"))
 
 " Emacs bindings in control mode
 :cnoremap <C-a>  <Home>
@@ -94,3 +94,4 @@ au BufReadCmd *.jar,*.xpi,*.ipa,*.apk call zip#Browse(expand("<amatch>"))
 :cnoremap <Esc>f <S-Right>
 :cnoremap <Esc>d <S-right><Delete>
 :cnoremap <C-g>  <C-c>
+
