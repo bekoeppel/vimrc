@@ -70,7 +70,7 @@ let g:Tex_IgnoreLevel = 8
 set modeline
 set modelines=5
 
-command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " highlight *.txt files in ~/work/src/wiki/ automatically with Dokuwiki syntax
 autocmd BufRead,BufNewFile ~/work/src/wiki/*.txt set filetype=Dokuwiki
@@ -95,3 +95,12 @@ au BufReadCmd *.jar,*.xpi,*.ipa,*.apk,*.docx,*.xlsx call zip#Browse(expand("<ama
 :cnoremap <Esc>d <S-right><Delete>
 :cnoremap <C-g>  <C-c>
 
+
+function! MindmapPrettyPrint() 
+    :set ts=4 sts=4 sw=4 expandtab
+    :retab
+    :2,$g/^[^[:space:]]/norm O
+    :%g/\v^[[:space:]]{4}/-1s/\v^([^[:space:]].*[^:])$/\1:/
+    :%s/\v^( {2,})  /\1- /
+    :%g/.*/norm gqj
+endfunction
