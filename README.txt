@@ -8,6 +8,16 @@ Check out these plugins
     https://github.com/tpope/vim-surround
     https://github.com/kylef/apiblueprint.vim.git
 
+
+Installing
+----------
+
+    git clone 'git@github.com:bekoeppel/vimrc.git' ~/.vim/
+    cd ~/.vim/
+    git submodule init
+    git submodule update
+
+
 Installed Bundles
 -----------------
 
