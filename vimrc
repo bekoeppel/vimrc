@@ -1,5 +1,23 @@
-" Pathogen as bundle/plugin manager
-execute pathogen#infect()
+set nocompatible
+
+" Required Vundle setup
+filetype off
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Plugin 'gmarik/vundle'
+
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-abolish'
+
+call vundle#end()
+
 
 " VIM colors
 color github

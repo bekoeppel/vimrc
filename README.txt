@@ -11,6 +11,8 @@ Check out these plugins
 Installed Bundles
 -----------------
 
+
+
 GIT:
 
     git://github.com/tpope/vim-fugitive.git
@@ -49,6 +51,16 @@ Use Ctrl-A/Ctrl-X to increase/decrease dates
     
     git://github.com/tpope/vim-speeddating.git
 
+
+Surround
+
+    Plugin 'tpope/vim-speeddating'
+    cs"' to change " to '
+
+
+Repeat Plugin Commands
+
+    Plugin 'tpope/vim-repeat'
 
 
 Adding Bundles
