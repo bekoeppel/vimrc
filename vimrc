@@ -66,3 +66,21 @@ function! MindmapPrettyPrint()
     :%s/\v^( {2,})  /\1- /
     :%g/.*/norm gqj
 endfunction
+
+" convert a Daily Sync node into an update that I can paste to slack
+function! DailySync()
+    :set ts=4 sts=4 sw=4 expandtab
+    :retab
+    :%g/^\s*Gestern$/-1j
+
+    if strftime('%a') == "Mon"
+        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... *Friday:*/
+    else
+        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... *Yesterday:*/
+    endif
+    :%s/^\s*Heute/*Today:*/
+    :%s/^\s*Inputs . Fragen/Open questions:/
+    :2,$g/^[^[:space:]]/norm O
+    :%s/\v^( {2,})  /\1- /
+endfunction
+
