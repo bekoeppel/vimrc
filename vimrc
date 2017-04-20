@@ -103,3 +103,17 @@ function! DailySync()
     :%s/\v^( {2,})  /\1- /
 endfunction
 
+" convert a copy-paste from JIRA stories into Confluence table
+function! SprintWikiPage()
+    :set ts=4 sts=4 sw=4 expandtab
+    " add a tab after each line
+    :%s/$/\t/
+    " join each task onto one line
+    :%v/^ Task/-1j
+    " delete first line
+    :1d
+    " format table
+    :%s/^\v^\s*Task\t(.{-})\t\s*(.{-})\t\s*(.{-})\t\s*(.{-})\t.*/|{jira:\1}|\2|\3|\4| | |/g
+    " insert header
+    call append(0, "||JIRA Issue||Epic||Specific Task||Assignee||Review 1||Final Review||")
+endfunction
