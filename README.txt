@@ -63,6 +63,11 @@ Repeat Plugin Commands
     Plugin 'tpope/vim-repeat'
 
 
+Search text highlighted in visual mode
+
+    Plugin 'tpope/vim-repeat'
+
+
 Adding Bundles
 --------------
 
