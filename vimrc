@@ -117,3 +117,24 @@ function! SprintWikiPage()
     " insert header
     call append(0, "||JIRA Issue||Epic||Specific Task||Assignee||Review 1||Final Review||")
 endfunction
+
+" convert a copy-paste from JIRA stories into Excel table
+function! SprintToExcel()
+    :set ts=4 sts=4 sw=4 expandtab
+    " add a tab after each line
+    :%s/$/\t/
+    " remove fotter
+    :%g/\v^\d*.\d* of \d*Refresh results/d
+    :%g/^Atlassian JIRA Project Management Software/d
+    :$d
+    " remove "Actions" button
+    :%s/\s*Actions\s*$//
+    " join each task onto one line
+    :%v/^ Task/-1j
+    " delete first line
+    :1d
+    " cleanup
+    :%s/^\s*//
+    " insert header
+    call append(0, "Type	Key	Epic	Epic Link	Summary	Assignee	Priority	Status	Resolution	Created	Updated	Due	Story Points")
+endfunction
