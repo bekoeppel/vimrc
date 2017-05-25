@@ -5,6 +5,7 @@ filetype off
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" NOTE: after adding something here, run :VundleInstall
 Plugin 'gmarik/vundle'
 
 Plugin 'editorconfig/editorconfig-vim'
@@ -16,6 +17,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-abolish'
 Plugin 'nelstrom/vim-visual-star-search'
+Plugin 'mbbill/undotree'
 
 call vundle#end()
 

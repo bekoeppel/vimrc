@@ -74,6 +74,13 @@ Search text highlighted in visual mode
 
     Plugin 'tpope/vim-repeat'
 
+Undo Tree
+
+    Plugin 'mbbill/undotree'
+
+    Use: :UndotreeToggle
+    Then go through the Undo history
+
 
 Adding Bundles
 --------------
