@@ -73,6 +73,12 @@ cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
 
+" useful settings from http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+set encoding=utf-8
+"set cursorline
+set ttyfast
+
+
 " show diff between current state and last saved state
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
