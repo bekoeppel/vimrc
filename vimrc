@@ -18,6 +18,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-abolish'
 Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'mbbill/undotree'
+Plugin 'dhruvasagar/vim-table-mode'
 
 call vundle#end()
 
