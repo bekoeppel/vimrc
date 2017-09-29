@@ -80,6 +80,9 @@ set encoding=utf-8
 "set cursorline
 set ttyfast
 
+" in visual, evaluate the selected formuala, append ' = ' and the result of the calculation
+vnoremap Q ygv<Esc>a = <C-r>=<C-\>e getreg('"')<CR><Esc><Esc>
+
 
 " show diff between current state and last saved state
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
