@@ -149,3 +149,18 @@ function! SprintToExcel()
     " insert header
     call append(0, "Type	Key	Epic	Epic Link	Summary	Assignee	Priority	Status	Resolution	Created	Updated	Due	Story Points")
 endfunction
+
+" convert a copy-paste from JIRA stories into Mindmap links (only for my own stories)
+function! SprintToMindmap()
+    :set ts=4 sts=4 sw=4 expandtab
+    " add a tab after each line
+    :%s/$/\t/
+    " join each task onto one line
+    :%v/\v^ (Task|Bug)/-1j
+    " delete first line
+    :1d
+    " delete what is not assigned to me
+    :%v/Benedikt K.ppel/d
+    " format table
+    :%s/^\v^\s*%(Task|Bug)\t(.{-})\t\s*(.{-})\t\s*(.{-})\t\s*(.{-})\t.*/\3\r\thttps:\/\/jira.locatee.ch\/browse\/\1/g
+endfunction
