@@ -120,11 +120,11 @@ function! SprintWikiPage()
     " add a tab after each line
     :%s/$/\t/
     " join each task onto one line
-    :%v/^ Task/-1j
+    :%v/\v^ (Task|Bug)/-1j
     " delete first line
     :1d
     " format table
-    :%s/^\v^\s*Task\t(.{-})\t\s*(.{-})\t\s*(.{-})\t\s*(.{-})\t.*/|{jira:\1}|\2|\3|\4| | |/g
+    :%s/^\v^\s*%(Task|Bug)\t(.{-})\t\s*(.{-})\t\s*(.{-})\t\s*(.{-})\t.*/|{jira:\1}|\2|\3|\4| | |/g
     " insert header
     call append(0, "||JIRA Issue||Epic||Specific Task||Assignee||Review 1||Final Review||")
 endfunction
@@ -141,7 +141,7 @@ function! SprintToExcel()
     " remove "Actions" button
     :%s/\s*Actions\s*$//
     " join each task onto one line
-    :%v/^ Task/-1j
+    :%v/\v^ (Task|Bug)/-1j
     " delete first line
     :1d
     " cleanup
