@@ -13,6 +13,8 @@ Installing
 
     git clone 'git@github.com:bekoeppel/vimrc.git' ~/.vim/
     ln -sr ~/.vim/vimrc ~/.vimrc 
+    git submodule update --init --recursive
+    :VundleInstall
 
 
 Installed Plugins
