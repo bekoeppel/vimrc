@@ -92,12 +92,13 @@ vnoremap Q ygv<Esc>a = <C-r>=<C-\>e getreg('"')<CR><Esc><Esc>
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 
 " convert a Blob copied from FreePlane to a nice text listing
-function! MindmapPrettyPrint() 
+function! MindmapPrettyPrint(tw) 
     :set ts=4 sts=4 sw=4 expandtab
     :retab
     :2,$g/^[^[:space:]]/norm O
     :%g/\v^[[:space:]]{4}/-1s/\v^([^[:space:]].*[^:])$/\1:/
     :%s/\v^( {2,})  /\1- /
+    exe ':set textwidth='.a:tw
     :%g/.*/norm gqj
 endfunction
 
@@ -108,9 +109,9 @@ function! DailySync()
     :%g/^\s*Gestern$/-1j
 
     if strftime('%a') == "Mon"
-        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... *Friday:*/
+        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... \r*Friday:*/
     else
-        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... *Yesterday:*/
+        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... \r*Yesterday:*/
     endif
     :%s/^\s*Heute/*Today:*/
     :%s/^\s*Inputs . Fragen/Open questions:/
@@ -168,3 +169,32 @@ function! SprintToMindmap()
     " format table
     :%s/^\v^\s*%(Task|Bug)\t(.{-})\t\s*(.{-})\t\s*(.{-})\t\s*(.{-})\t.*/\3\r\thttps:\/\/jira.locatee.ch\/browse\/\1/g
 endfunction
+
+
+" When copying from Google Calendar, dates look like this
+" Thursday, January 25
+" 08:00 – 09:00
+"
+" I want them to look like this
+" Thu, 25. Jan 2018: 08:00 - 09:00
+function! GoogleCalendarDateFormat()
+    :set ts=4 sts=4 sw=4 expandtab
+    " add a : to all lines that don't contain a –, but are not empty
+    :%v/ – /s/..*$/&: /
+    " join lines that contain a – to the previous line
+    :%g/ – /-1j
+    " remove newlines
+    :%g/^\s*$/d
+    " replace date
+    "date '+%A, %B %e' -d 'Thursday, January 25'
+   
+endfunction
+
+
+" cleanup Evernote note, saved as RTF, pasted from Windows
+function! CleanupEvernoteToBullets()
+    :%s/•	/  - /
+    :%s/o	/      - /
+    :%s/	/          - /
+endfunction
+
