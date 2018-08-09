@@ -94,6 +94,8 @@ Surround:
     https://github.com/tpope/vim-surround
     cs"' to change " to '
 
+    ysiw" to add " around a word
+
 
 Search text highlighted in visual mode
 
