@@ -32,6 +32,7 @@ syntax enable
 " 1 Tab is 4 Spaces, immediately expanded
 set tabstop=4
 set softtabstop=4
+set shiftwidth=4
 set expandtab
 " load filetype specific indent files from ~/.vim/indent/filetype.vim
 filetype indent on
@@ -42,6 +43,8 @@ set autoindent
 " read modeline (e.g. vi:noai:sw=3 ts=6) from the first 5 lines of a file
 set modeline
 set modelines=5
+" don't insert double space after a sentence when joining lines
+set nojoinspaces
 
 " UI config
 " show line numbers
