@@ -19,6 +19,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'mbbill/undotree'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 
@@ -34,6 +35,10 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+" for *.go files, we want tabs
+autocmd FileType go setlocal noexpandtab
+" for *.yaml files we want 2 spaces
+autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " load filetype specific indent files from ~/.vim/indent/filetype.vim
 filetype indent on
 " Spaces and tabs can be configured with .editorconfig
@@ -63,6 +68,8 @@ set ruler
 " file handling
 " open JAR, XPI, IPA, APK, DOCX and XLSX files as ZIP
 au BufReadCmd *.jar,*.xpi,*.ipa,*.apk,*.docx,*.xlsx call zip#Browse(expand("<amatch>"))
+au BufReadCmd *.ova call tar#Browse(expand("<amatch>"))
+
 
 " Emacs bindings in control mode
 cnoremap <C-a>  <Home>
@@ -93,31 +100,37 @@ command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincm
 
 " convert a Blob copied from FreePlane to a nice text listing
 function! MindmapPrettyPrint(tw) 
-    :set ts=4 sts=4 sw=4 expandtab
-    :retab
-    :2,$g/^[^[:space:]]/norm O
-    :%g/\v^[[:space:]]{4}/-1s/\v^([^[:space:]].*[^:])$/\1:/
-    :%s/\v^( {2,})  /\1- /
+    set ts=4 sts=4 sw=4 expandtab
+    retab
+    silent 2,$g/^[^[:space:]]/norm O
+    %g/\v^[[:space:]]{4}/-1s/\v^([^[:space:]].*[^:])$/\1:/
+    %s/\v^( {2,})  /\1- /
     exe ':set textwidth='.a:tw
-    :%g/.*/norm gqj
+    %g/.*/norm gqj
+    %s/[<>]//g
 endfunction
 
 " convert a Daily Sync node into an update that I can paste to slack
+" function! DailySync()
+"     :set ts=4 sts=4 sw=4 expandtab
+"     :retab
+"     :%g/^\s*Gestern$/-1j
+" 
+"     if strftime('%a') == "Mon"
+"         :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... \r*Friday:*/
+"     else
+"         :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... \r*Yesterday:*/
+"     endif
+"     :%s/^\s*Heute/*Today:*/
+"     :%s/^\s*Inputs . Fragen/Open questions:/
+"     :2,$g/^[^[:space:]]/norm O
+"     :%s/\v^( {2,})  /\1- /
+" endfunction
 function! DailySync()
-    :set ts=4 sts=4 sw=4 expandtab
-    :retab
-    :%g/^\s*Gestern$/-1j
-
-    if strftime('%a') == "Mon"
-        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... \r*Friday:*/
-    else
-        :%s/^Daily Sync Gestern/Good morning, my updates for the daily sync... \r*Yesterday:*/
-    endif
-    :%s/^\s*Heute/*Today:*/
-    :%s/^\s*Inputs . Fragen/Open questions:/
-    :2,$g/^[^[:space:]]/norm O
-    :%s/\v^( {2,})  /\1- /
+    :%!/home/beni/Applications/daily-sync.pl
 endfunction
+
+
 
 " convert a copy-paste from JIRA stories into Confluence table
 function! SprintWikiPage()
@@ -198,3 +211,26 @@ function! CleanupEvernoteToBullets()
     :%s/	/          - /
 endfunction
 
+
+" open up to 100 tabs
+set tabpagemax=100
+
+" more characters will be sent to the screen for redrawing
+set ttyfast
+" time waited for key press(es) to complete. It makes for a faster key response
+set ttimeout
+set ttimeoutlen=50
+
+" disable line wrap
+set nowrap
+" toggle line wrap with Alt-w
+nnoremap <unique> <M-w> :set wrap!<CR>
+" toggle line wrap in insert mode with Alt-w. See https://vi.stackexchange.com/a/2363/18001 for details
+execute "set <M-w>=\ew"
+inoremap <unique> <M-w> <C-o>:set wrap!<CR>
+
+" disable ex mode
+nnoremap Q <nop>
+
+" make ":vim" do the same as ":tabe"
+cnoreabbrev vim tabe
