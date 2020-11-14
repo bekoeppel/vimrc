@@ -20,6 +20,7 @@ Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'mbbill/undotree'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'pedrohdz/vim-yaml-folds'
 
 call vundle#end()
 
@@ -35,6 +36,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+" enable filetype plugins
+filetype plugin on
 " for *.go files, we want tabs
 autocmd FileType go setlocal noexpandtab
 " for *.yaml files we want 2 spaces
