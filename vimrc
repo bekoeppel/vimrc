@@ -54,6 +54,10 @@ set modelines=5
 " don't insert double space after a sentence when joining lines
 set nojoinspaces
 
+" don't fold by default, and start with everything unfolded
+set nofoldenable
+set foldlevel=100
+
 " UI config
 " show line numbers
 set number 
