@@ -234,3 +234,10 @@ nnoremap Q <nop>
 
 " make ":vim" do the same as ":tabe"
 cnoreabbrev vim tabe
+
+" Make Shift-Tab do << (decrement indent by one tab)
+" for command mode
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+" for insert mode
+inoremap <S-Tab> <C-d>
